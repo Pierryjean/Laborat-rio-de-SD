@@ -76,4 +76,52 @@ end mean_4_clocks;
 	
 	-- Instanciar os componentes e interligá-los.
 	-- Construir Testbench
-	--
+	
+	begin
+	
+	SobeDesce_Entrada <= Sobe & Desce;
+	
+	instancia_Reg_E : RegW  --Registrador que lê as entradas.
+	generic ( W => 4)
+	port map (
+		clock => Clock,
+		reset => '0',
+		load => Load_E,
+		D => E,
+		Q => SigE
+	);
+	
+	instancia_Reg_MA : mean_4_clocks -- Registrador que realiza a média
+	generic ( W => 4)
+	port map(
+	
+	CLK => Clock,
+	RESET => Reset_MA,
+	INPUT => SigE,
+	OUTPUT => SigM
+	);
+	
+	instancia_Comparador : Comparador -- Compara o Valor  da entrada Reg_E com a média de Reg_Ma
+	generic ( W => 4)
+	port map(
+	a => SigE,
+	b => SigM,
+	maior => Maior,
+	menor => Menor
+	);
+	
+
+	instancia_Reg_SD : RegW
+	generic ( W => 2)
+	port map (
+	clock => Clock,
+	reset => '0',
+	load => Atualize,
+	D => SobeDesce_Entrada,
+	Q => UpDown
+	);
+	
+	-- Fazer u, if-else para a saída updown.
+	process 
+	
+		if ( )
