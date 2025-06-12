@@ -4,11 +4,11 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity comparador is
     generic (
-        DATA_WIDTH : natural := 16
+        W : natural := 16
     );
     port (
-        a      : in  STD_LOGIC_VECTOR((DATA_WIDTH - 1) downto 0);
-        b      : in  STD_LOGIC_VECTOR((DATA_WIDTH - 1) downto 0);
+        a      : in  STD_LOGIC_VECTOR((W - 1) downto 0);
+        b      : in  STD_LOGIC_VECTOR((W- 1) downto 0);
         maior  : out STD_LOGIC;
         menor  : out STD_LOGIC;
         igual  : out STD_LOGIC
@@ -16,7 +16,7 @@ entity comparador is
 end comparador;
 
 architecture comportamento of comparador is
-    signal a_signed, b_signed : signed((DATA_WIDTH - 1) downto 0);
+    signal a_signed, b_signed : signed((W - 1) downto 0);
 begin
     
     a_signed <= signed(a);
